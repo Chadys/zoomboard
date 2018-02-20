@@ -22,11 +22,10 @@
 					var typed_div = $("div.typed");
 					if(key === "delete") {
 						typed_div.contents().last().remove();
-                        $("div.sentence").sentences_manager("removeLetter");
 					} else {
 						typed_div.append(key);
-                        $("div.sentence").sentences_manager("receiveNewLetter", key);
 					}
+                    $("div.sentence").sentences_manager("receiveNewLetter", key);
 				});
 			});
 		</script>

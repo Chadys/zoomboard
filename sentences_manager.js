@@ -34,23 +34,39 @@
                 this.sentence.push({letter: selectedSentence[i], color: LetterColorEnum.NEUTRAL});
             }
         },
-        receiveNewLetter: function (letter) {
-            this.sentence[this.letterIndex].color = (letter === this.sentence[this.letterIndex].letter) ?
-                LetterColorEnum.CORRECT : LetterColorEnum.ERROR;
-            this.letterIndex++;
-            this._refresh();
-            // TODO : enter to switch sentence
-            if (this.letterIndex === this.sentence.length){
-                var endSentenceEvent = jQuery.Event("sentence_finished");
-                this.element.trigger(endSentenceEvent);
-                this.addNewSentence();
-                this._refresh();
+        receiveNewLetter: function (key) {
+            switch (key){
+                case "delete":
+                    this.removeLetter();
+                    break;
+
+                case "enter":
+                    this.endSentence();
+                    break;
+
+                default:
+                    this.addLetter(key);
             }
         },
         removeLetter: function () {
             if (this.letterIndex === 0) return;
             this.letterIndex--;
             this.sentence[this.letterIndex].color = LetterColorEnum.NEUTRAL;
+            this._refresh();
+        },
+        endSentence: function () {
+            var endSentenceEvent = jQuery.Event("sentence_finished");
+            this.element.trigger(endSentenceEvent);
+            this.addNewSentence();
+            this._refresh();
+        },
+        addLetter: function (letter) {
+            if (this.letterIndex === this.sentence.length){
+                return;
+            }
+            this.sentence[this.letterIndex].color = (letter === this.sentence[this.letterIndex].letter) ?
+                LetterColorEnum.CORRECT : LetterColorEnum.ERROR;
+            this.letterIndex++;
             this._refresh();
         }
     });
