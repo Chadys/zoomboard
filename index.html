@@ -27,6 +27,9 @@
 					}
                     $("div.sentence").sentences_manager("receiveNewLetter", key);
 				});
+                setTimeout(function () {
+                    $("body").empty().append("<span class='thanks'>Merci pour votre temps !</span>");
+                }, 180000);
 			});
 		</script>
 		<style type="text/css">
@@ -44,10 +47,15 @@
 				font-size: 24pt;
 				margin: 5px;
 			}
-			div.sentence {
-				font-size: 28pt;
-				margin: 5px;
-			}
+            div.sentence {
+                font-size: 28pt;
+                margin: 5px;
+            }
+            span.thanks {
+                font-size: 28pt;
+                color: red;
+                margin: 5px;
+            }
 		</style>
 	</head>
 	<body>
