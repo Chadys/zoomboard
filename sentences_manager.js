@@ -16,15 +16,14 @@
 
         },
         _create: function() {
-            this.container = this.element;
             this.addNewSentence();
             this._refresh();
         },
         _refresh: function () {
-            this.container.empty();
+            this.element.empty();
             for(var i = 0; i<this.sentence.length; i++) {
                 var currentLetter = this.sentence[i];
-                this.container.append('<span style="color: '+currentLetter.color+';">'+currentLetter.letter+'</span>');
+                this.element.append('<span style="color: '+currentLetter.color+';">'+currentLetter.letter+'</span>');
             }
         },
         addNewSentence: function () {
@@ -42,7 +41,8 @@
             this._refresh();
             // TODO : enter to switch sentence
             if (this.letterIndex === this.sentence.length){
-                //TODO:clear textbox
+                var endSentenceEvent = jQuery.Event("sentence_finished");
+                this.element.trigger(endSentenceEvent);
                 this.addNewSentence();
                 this._refresh();
             }

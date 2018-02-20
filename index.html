@@ -11,7 +11,10 @@
         <script type="text/javascript" src="zoom_widget.js"></script>
 		<script type="text/javascript">
 			$(function() {
-                $("div.sentence").sentences_manager();
+                $("div.sentence").sentences_manager(
+                ).on("sentence_finished", function (event) {
+                    $("div.typed").empty();
+                });
                 $("div.container").zoomboard({
 					original_scale: 0.15
 				}).on("zb_key", function(event) {
@@ -49,7 +52,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="instructions">Merci d'écrire la phrase suivante :</div>
+		<div class="instructions">Merci d'écrire la phrase suivante, puis appuyez sur Entrée :</div>
 		<div class="sentence"></div>
 		<div class="typed"></div>
 		<div class="container"></div>
