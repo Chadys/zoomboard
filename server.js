@@ -2,7 +2,6 @@
 
 var express = require('express');
 var fs = require('fs');
-var url = 'http://localhost:8000/';
 
 var app = express.createServer();
 app.configure(function() {
@@ -25,16 +24,16 @@ app.get('/thanks', function(req, res){
 });
 
 app.get('/save_result', function(req, res){
-    var textResult = "kspc : " + req.query["kspc"] + " ; wpm : " + req.query["wpm"];
-    fs.writeFileSync(req.query["filename"], textResult, function (err) {
+    var textResult = "kspc : " + req.query["kspc"] + " ; wpm : " + req.query["wpm"] + '\n';
+    fs.writeFileSync(req.query["filename"], textResult, {'flag':'a'}, function (err) {
         if (err) {
             return console.log('there is an error');
         }
 
         console.log('the file was saved');
     });
-    res.redirect(url + 'thanks');
+    res.redirect(req.protocol + '://' + req.headers['host'] + '/thanks');
 });
 
-app.listen(8000);
-console.log("Fast times at " + url);
+app.listen(8000, '0.0.0.0');
+console.log("Fast times at http://0.0.0.0:8000/");

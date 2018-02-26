@@ -78,7 +78,7 @@
             var nMinute = time/1000/60;
             var kspc = this.nCharacters === 0 ? 0 : this.keyStroke / this.nCharacters;
             var wpm = this.nWords / nMinute;
-            window.location.href = "http://localhost:8000/save_result?kspc="+kspc+"&wpm="+wpm+"&filename="+this.options.filename;
+            window.location.href = window.location.href.replace(/.+_test/,"save_result?kspc="+kspc+"&wpm="+wpm+"&filename="+this.options.filename);
         }
     });
 }());
