@@ -2,7 +2,7 @@
     var LetterColorEnum = Object.freeze({NEUTRAL: "#0b559b", CORRECT: "#0B610B", ERROR: "#B40404"});
     $.widget("manager.sentences_manager", {
         options: {
-
+            filename: "result.txt"
         },
         _create: function() {
             this.keyStroke = 0;
@@ -78,7 +78,7 @@
             var nMinute = time/1000/60;
             var kspc = this.nCharacters === 0 ? 0 : this.keyStroke / this.nCharacters;
             var wpm = this.nWords / nMinute;
-            window.location.href = "http://localhost:8000/save_result?kspc="+kspc+"&wpm="+wpm;
+            window.location.href = "http://localhost:8000/save_result?kspc="+kspc+"&wpm="+wpm+"&filename="+this.filename;
         }
     });
 }());

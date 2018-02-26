@@ -2,4 +2,4 @@ node_modules
 .DS_Store
 *.swp
 .idea/*
-result.txt
+result_*.txt

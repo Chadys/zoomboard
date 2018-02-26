@@ -1,0 +1,85 @@
+<html>
+<meta charset="UTF-8">
+<head>
+    <link type="text/css" href="jquery-ui-1.8.16.custom/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="keys.js"></script>
+    <script type="text/javascript" src="corpus.js"></script>
+    <script type="text/javascript" src="sentences_manager.js"></script>
+    <script type="text/javascript" src="zoom_widget.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var time = 180000;
+            $("div.sentence").sentences_manager({ filename: "result_zoom.txt" }
+            ).on("sentence_finished", function (event) {
+                $("div.typed").empty();
+            });
+            $("div.keyboard").zoomboard({
+                original_scale: 0.15
+            }).on("zb_key", function(event) {
+                var key = event.key;
+                var typed_div = $("div.typed");
+                if(key === "delete") {
+                    typed_div.contents().last().remove();
+                } else {
+                    typed_div.append(key);
+                }
+                $("div.sentence").sentences_manager("receiveNewLetter", key);
+            });
+            $("button").click(function (mouseEvent) {
+                $("div.sentence").sentences_manager("receiveNewLetter", "enter");
+            });
+            setTimeout(function () {
+                $("div.sentence").sentences_manager("endTest", time);
+                $("body").empty().append("<span class='thanks'>Merci pour votre temps !</span>");
+            }, time);
+        });
+    </script>
+    <style type="text/css">
+        div.typed {
+            font-size: 48pt;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 100;
+            height: 80px;
+            scroll: auto;
+        }
+        :focus {
+            outline: none;
+        }
+        div.instructions {
+            font-size: 24pt;
+            margin: 5px;
+        }
+        div.sentence {
+            font-size: 28pt;
+            margin: 5px;
+        }
+        span.thanks {
+            font-size: 28pt;
+            color: red;
+            margin: 5px;
+        }
+        td {
+            padding-right: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="instructions">Merci d'écrire la phrase ci-dessous :</div>
+<div class="sentence"></div>
+<div class="typed"></div>
+<table class="container">
+    <tr>
+        <td>
+            <div class="keyboard"></div>
+        </td>
+        <td>
+            <button type="button">Phrase suivante</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
