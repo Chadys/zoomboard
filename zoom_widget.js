@@ -16,8 +16,12 @@ $.widget("ui.zoomboard", {
 		, min_swipe_y: 30
 		, max_key_error_distance: 2
 		, use_real_keyboard: true
+		, zoom_disabled: false
     }
 	, _create: function() {
+	    if (this.options.zoom_disabled){
+	        this.options.max_zoom = this.options.original_scale;
+        }
 		$.Widget.prototype._create.call(this);
 		var self = this;
 		this.original_position = {
