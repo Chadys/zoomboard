@@ -24,7 +24,7 @@
                 var typed_div = $("div.typed");
                 if(key === "delete") {
                     typed_div.contents().last().remove();
-                } else {
+                } else if(key !== "enter"){
                     typed_div.append(key);
                 }
                 $("div.sentence").sentences_manager("receiveNewLetter", key);

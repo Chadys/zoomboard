@@ -21,7 +21,6 @@
         },
         addNewSentence: function () {
             // this.letterIndex = 0;
-            this.typedText = "";
             this.sentence = [];
             var selectedSentence = corpus[Math.floor(Math.random() * Math.floor(corpus.length))];
             for(var i = 0; i<selectedSentence.length; i++) {
@@ -47,7 +46,7 @@
             // this.letterIndex--;
             // this.sentence[this.letterIndex].color = LetterColorEnum.NEUTRAL;
             // this._refresh();
-            this.typedText.slice(0, -1);
+            this.typedText = this.typedText.slice(0, -1);
             this.keyStroke++;
         },
         endSentence: function () {
@@ -60,7 +59,8 @@
         },
         updateStat: function () {
             this.nCharacters += this.typedText.length;
-            this.nWords += this.typedText.split(" ").length;
+            this.nWords += this.typedText.length === 0 ? 0 : this.typedText.split(" ").length;
+            this.typedText = "";
         },
         addLetter: function (letter) {
             // if (this.letterIndex === this.sentence.length){
@@ -78,7 +78,7 @@
             var nMinute = time/1000/60;
             var kspc = this.nCharacters === 0 ? 0 : this.keyStroke / this.nCharacters;
             var wpm = this.nWords / nMinute;
-            window.location.href = "http://localhost:8000/save_result?kspc="+kspc+"&wpm="+wpm+"&filename="+this.filename;
+            window.location.href = "http://localhost:8000/save_result?kspc="+kspc+"&wpm="+wpm+"&filename="+this.options.filename;
         }
     });
 }());
