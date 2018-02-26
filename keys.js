@@ -91,6 +91,6 @@
     window.keys = keys;
 
     var keys_sym = [];
-    init_keys(raw_keys_sym, keys);
+    init_keys(raw_keys_sym, keys_sym);
     window.keys_sym = keys_sym;
 }());
