@@ -8,13 +8,22 @@
 		<script type="text/javascript" src="jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-                $("button.physical").click(function (mouseEvent) {
+                var bPhysical = $("button.physical");
+                var bNoZoom = $("button.noZoom");
+                var bZoom = $("button.zoom");
+			    if(navigator.userAgent.match(/(iPad)|(iPod)|(iPhone)/i) != null){
+                    bPhysical.prop("disabled",true);
+                } else {
+                    bNoZoom.prop("disabled",true);
+                    bZoom.prop("disabled",true);
+                }
+                bPhysical.click(function (mouseEvent) {
                     window.location.href = window.location.href+"physical_test";
                 });
-                $("button.noZoom").click(function (mouseEvent) {
+                bNoZoom.click(function (mouseEvent) {
                     window.location.href = window.location.href+"no_zoom_test";
                 });
-                $("button.zoom").click(function (mouseEvent) {
+                bZoom.click(function (mouseEvent) {
                     window.location.href = window.location.href+"zoomboard_test";
                 });
 			});

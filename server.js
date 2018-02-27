@@ -24,7 +24,7 @@ app.get('/thanks', function(req, res){
 });
 
 app.get('/save_result', function(req, res){
-    var textResult = "kspc : " + req.query["kspc"] + " ; wpm : " + req.query["wpm"] + '\n';
+    var textResult = "kspc : " + req.query["kspc"] + " ; wpm : " + req.query["wpm"] + " ; msd : " + req.query["msd"] + '\n';
     fs.writeFileSync(req.query["filename"], textResult, {'flag':'a'}, function (err) {
         if (err) {
             return console.log('there is an error');
