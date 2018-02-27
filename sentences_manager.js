@@ -27,7 +27,7 @@
             this.sentence = [];
             this.selectedSentence = corpus[Math.floor(Math.random() * Math.floor(corpus.length))];
             for(var i = 0; i < this.selectedSentence.length; i++) {
-                this.sentence.push({letter: selectedSentence[i], color: LetterColorEnum.NEUTRAL});
+                this.sentence.push({letter: this.selectedSentence[i], color: LetterColorEnum.NEUTRAL});
             }
         },
         receiveNewLetter: function (key) {
