@@ -11,7 +11,7 @@
                 var bPhysical = $("button.physical");
                 var bNoZoom = $("button.noZoom");
                 var bZoom = $("button.zoom");
-			    if(navigator.userAgent.match(/(iPad)|(iPod)|(iPhone)/i) != null){
+			    if(navigator.userAgent.match(/(iPad)|(iPod)|(iPhone)|(Android)/i) != null){
                     bPhysical.prop("disabled",true);
                 } else {
                     bNoZoom.prop("disabled",true);
